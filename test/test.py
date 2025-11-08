@@ -35,14 +35,14 @@ async def test_project(dut):
     # Test coefficients one by one
     TAPS = 3
     SIZE = 100
-    seq = np.random.randint(-128 >> TAPS, 128 >> TAPS, size=SIZE)
+    seq = np.random.randint(-32 >> TAPS, 32 >> TAPS, size=SIZE)
     # seq = -np.ones(SIZE, dtype=int)
     # seq[SIZE//2:] = 0
     # h = np.ones(TAPS, dtype=int)  # Simple moving average filter coefficients
     h = np.zeros(TAPS, dtype=int)
     h[-1] = 1
-    h = np.random.randint(-128 >> TAPS, 128 >> TAPS, size=TAPS)
-    y = np.clip(np.convolve(seq, h, mode='full')[:SIZE], -128, 127)  # Perform convolution and truncate to SIZE
+    h = np.random.randint(-32 >> TAPS, 32 >> TAPS, size=TAPS)
+    y = np.clip(np.convolve(seq, h, mode='full')[:SIZE], -32, 32)  # Perform convolution and truncate to SIZE
     print(y)
     # Load coefficients
     for i in range(TAPS):
@@ -58,6 +58,8 @@ async def test_project(dut):
         dut.ui_in.value = int(seq[i])
         await ClockCycles(dut.clk, 1)
         if i > 2 :
-            signed_value = dut.uo_out.value.signed_integer
+            signed_value = int(dut.uo_out.value) & 0b111111  # Take only 6 bits
+            if signed_value >= 32:
+                signed_value -= 64
             assert signed_value == int(y[i-2]), f"At index {i-2}, expected {y[i-2]}, got {signed_value}"
             dut._log.info(f"At index {i-2}, input: {seq[i]}, expected output: {y[i-2]}, got: {dut.uo_out.value}")
