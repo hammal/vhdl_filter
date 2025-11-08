@@ -4,7 +4,7 @@ library IEEE;
 
 entity tt_um_hammal_fir_filter is
   generic (
-    TAPS : integer := 4
+    TAPS : integer := 3
   );
   port (
     ui_in   : in  std_logic_vector(7 downto 0);

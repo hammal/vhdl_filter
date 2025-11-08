@@ -33,7 +33,7 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
     # Test coefficients one by one
-    TAPS = 4
+    TAPS = 3
     SIZE = 100
     seq = np.random.randint(-128 >> TAPS, 128 >> TAPS, size=SIZE)
     # seq = -np.ones(SIZE, dtype=int)
