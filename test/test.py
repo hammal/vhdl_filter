@@ -4,6 +4,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
+import pickle
 
 
 async def reset(dut):
@@ -33,14 +34,16 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
     # Test coefficients one by one
-    TAPS = 4
+    TAPS = 5
     SIZE = 100
-    seq = [1, -2, 0, 1, -2, 0, 0, 1, -2, -1, 0, 1, 1, 1, -2, 1, 0, 1, -2, 1, 1, -1, 0, -1, 0, -2, 0, 0, -1, 1, 1, -2, -2, 0, 0, 0, 0, 1, 0, -2, 1, -2, -2, 1, -1, -2, -2, 1, 0, 1, 1, -1, 1, -1, 0, -1, 0, -2, 1, -2, -2, -2, -2, -1, -1, -1, 0, -1, -2, 0, -1, -1, -2, -1, 0, -1, 1, 1, 0, 0, -1, 1, -1, -1, 0, -2, -1, -1, 0, 0, -1, 1, -2, 1, -2, 1, -1, -1, -2, -2]
+    with open("test_data.pkl", "rb") as f:
+        data = pickle.load(f)
+    seq = data["seq"]
     # seq = -np.ones(SIZE, dtype=int)
     # seq[SIZE//2:] = 0
     # h = np.ones(TAPS, dtype=int)  # Simple moving average filter coefficients
-    h = [-2, 1, 0, -2]
-    y = [-2, 5, -2, -4, 9, -2, -2, 2, 5, 0, -3, 2, 1, -1, 3, -6, -1, 2, 3, -4, -3, 7, -3, 0, 1, 4, 0, 0, 6, -3, -1, 7, 0, -4, 4, 4, 0, -2, 1, 4, -6, 5, 6, -6, 7, 7, 0, -2, 5, 2, -3, 3, -5, 1, 1, 0, 1, 4, -2, 5, 6, 0, 6, 4, 5, 5, 1, 4, 5, -2, 4, 5, 3, 2, 1, 6, -1, -1, 3, -2, 0, -3, 3, 3, -3, 6, 2, 1, 3, 2, 4, -3, 5, -2, 3, 0, 1, 5, 1, 4]
+    h = data["h"]
+    y = data["y"]
     print(y)
     # Load coefficients
     for i in range(TAPS):
