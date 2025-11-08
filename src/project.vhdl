@@ -16,8 +16,9 @@ entity tt_um_example is
 end tt_um_example;
 
 architecture Behavioral of tt_um_example is
+    signal a : unsigned(7 downto 0);
 begin
-
+    
     uo_out <= std_logic_vector(unsigned(ui_in) + unsigned(uio_in));
     uio_out <= "00000000";
     uio_oe <= "00000000";

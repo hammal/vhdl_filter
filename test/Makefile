@@ -2,10 +2,10 @@
 # See https://docs.cocotb.org/en/stable/quickstart.html for more info
 
 # List your source files here:
-SOURCE_FILES = project.vhdl
+SOURCE_FILES = fir_filter.vhdl
 
 # Toplevel name of your VHDL project
-COCOTB_TOPLEVEL = tt_um_example
+COCOTB_TOPLEVEL = tt_um_hammal_fir_filter
 
 # Common
 WAVES ?= 1
@@ -22,7 +22,7 @@ SIM = ghdl
 VHDL_SOURCES = $(addprefix $(SRC_DIR)/,$(SOURCE_FILES))
 SIM_BUILD = sim_build
 SIM_ARGS += --vcd=$(SIM_BUILD)/tb.vcd
-EXTRA_ARGS += --workdir=$(SIM_BUILD) --work=work
+EXTRA_ARGS += --workdir=$(SIM_BUILD) --work=work --std=08
 
 else
 
@@ -59,7 +59,7 @@ VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 endif
 
 # Allow sharing configuration between design and testbench via `include`:
-COMPILE_ARGS 		+= -I$(SRC_DIR)
+COMPILE_ARGS += -I$(SRC_DIR)
 
 # Include the testbench sources:
 VERILOG_SOURCES += $(PWD)/tb.v
