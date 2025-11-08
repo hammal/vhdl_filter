@@ -66,10 +66,11 @@ begin
     end if;
   end process;
 
-  sat_pos <= '1' when acc > to_signed(31, acc'length) else '0';
-  sat_neg <= '1' when acc < to_signed(- 32, acc'length) else '0';
+  -- sat_pos <= '1' when acc > to_signed(31, acc'length) else '0';
+  -- sat_neg <= '1' when acc < to_signed(- 32, acc'length) else '0';
 
-  uo_out  <= "00011111" when sat_pos = '1' else "00100000" when sat_neg = '1' else "00" & std_logic_vector(resize(acc, 6));
+  uo_out  <= "00" & std_logic_vector(resize(acc, 6));
+  -- uo_out  <= "00011111" when sat_pos = '1' else "00100000" when sat_neg = '1' else "00" & std_logic_vector(resize(acc, 6));
   uio_out <= "00000000";
   uio_oe  <= "00000000";
   load    <= uio_in(0); -- Load filter coefficients signal
