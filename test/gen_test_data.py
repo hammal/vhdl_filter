@@ -2,7 +2,7 @@ import numpy as np
 
 
 # Test coefficients one by one
-TAPS = 3
+TAPS = 4
 SIZE = 100
 seq = np.random.randint(-32 >> TAPS, 32 >> TAPS, size=SIZE)
 # seq = -np.ones(SIZE, dtype=int)
@@ -14,8 +14,8 @@ h = np.random.randint(-32 >> TAPS, 32 >> TAPS, size=TAPS)
 y = np.clip(np.convolve(seq, h, mode='full')[:SIZE], -32, 32)  # Perform convolution and truncate to SIZE
 
 
-print(seq)
+print(seq.tolist())  # Convert numpy array to list for printing
 print("---")
-print(h)
+print(h.tolist())
 print("---")
-print(y)
+print(y.tolist())
