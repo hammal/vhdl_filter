@@ -26,24 +26,24 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "input signal (0)"
+  ui[1]: "input signal (1)"
+  ui[2]: "input signal (2)"
+  ui[3]: "input signal (3)"
+  ui[4]: "input signal (4)"
+  ui[5]: "input signal (5)"
+  ui[6]: "input signal (6)"
+  ui[7]: "input signal (7)"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "output signal (0)"
+  uo[1]: "output signal (1)"
+  uo[2]: "output signal (2)"
+  uo[3]: "output signal (3)"
+  uo[4]: "output signal (4)"
+  uo[5]: "output signal (5)"
+  uo[6]: "output signal (6)"
+  uo[7]: "output signal (7)"
 
   # Bidirectional pins
   uio[0]: "load signal"
